@@ -1,0 +1,17 @@
+{
+  "name": "mp_socket_server",
+  "version": "1.0.0",
+  "description": "Socket Server for Semen Merah Putih Application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Triadi Prabowo",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "node-gcm": "^0.14.3",
+    "socket.io": "^1.4.6"
+  }
+}
