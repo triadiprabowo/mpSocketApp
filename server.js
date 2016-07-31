@@ -63,8 +63,7 @@ app.post('/sendMessage', function(req, res, next) {
 
 	io.to(req.body.roomId).emit('messageReceived', chatdata);
 	io.emit('notif_msg_unread', chatdata);
-
-
+	
 	var sender = new gcm.Sender('AIzaSyCL4L12p-bjEkx8Z_kXBze4zHcHEzdUYiM'),
 		message = new gcm.Message();
 
@@ -76,13 +75,19 @@ app.post('/sendMessage', function(req, res, next) {
 	message.delayWhileIdle = true;
 	message.timeToLive = 3;
 
-	sender.send(message, [userdata.token], 4, function(result) {
-		// Check if success / print the result
-		res.send(result);
-	});
+	if(userdata.token) {
+		sender.send(message, [userdata.token], 4, function(result) {
+			// Check if success / print the result
+			res.send(result);
+		});	
+	}
+	else {
+		res.send('Success');
+	}
+	
 });
 
 // Running Server
-http.listen(port, host, function() {
+http.listen(port, function() {
 	console.log('Socket server running in '+host+':'+port);
 });
