@@ -16,7 +16,7 @@ var express = require('express'),
 	port = 3002;
 
 // Registering Middleware
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
@@ -59,9 +59,7 @@ io.on('connection', function(socket) {
 });
 
 app.post('/sendMessage', function(req, res, next) {
-	console.log(JSON.stringify(req.body.chatData));
-
-	/*var userdata = JSON.parse(req.body.userData),
+	var userdata = JSON.parse(req.body.userData),
 		chatdata = JSON.parse(req.body.chatData);
 
 	io.to(req.body.roomId).emit('messageReceived', chatdata);
@@ -86,7 +84,7 @@ app.post('/sendMessage', function(req, res, next) {
 	}
 	else {
 		res.send('Success');
-	}*/
+	}
 	
 });
 
