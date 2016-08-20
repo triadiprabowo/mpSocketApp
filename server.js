@@ -88,6 +88,37 @@ app.post('/sendMessage', function(req, res, next) {
 	
 });
 
+app.post('/notification/chat', function(req, res, next) {
+	var uid = req.body.uid,
+		total = req.body.total;
+
+	var data, output;
+
+	if(uid && total) {
+		data = {
+			uid: uid,
+			total: total
+		};
+
+		output = {
+			status: 200,
+			message: 'Emit event successfully sent to client id: '+data.uid
+		}
+
+		io.emit('chat_notif_unread', data);
+
+		res.status(200).send('Success request!');
+	}
+	else {
+		output = {
+			status: 400,
+			message: 'Required parameters missing (uid, total)'
+		}
+
+		res.status(output.status).send(output);
+	}
+});
+
 // Running Server
 http.listen(port, function() {
 	console.log('Socket server running in '+host+':'+port);
