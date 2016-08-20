@@ -11,6 +11,7 @@ var express = require('express'),
 	http = require('http').Server(app),
 	io = require('socket.io')(http),
 	gcm = require('node-gcm'),
+	parseJson = require('parse-json'),
 	host = '127.0.0.1',
 	port = 3002;
 
@@ -58,7 +59,9 @@ io.on('connection', function(socket) {
 });
 
 app.post('/sendMessage', function(req, res, next) {
-	var userdata = JSON.parse(req.body.userData),
+	console.log(JSON.stringify(req.body.chatData));
+
+	/*var userdata = JSON.parse(req.body.userData),
 		chatdata = JSON.parse(req.body.chatData);
 
 	io.to(req.body.roomId).emit('messageReceived', chatdata);
@@ -83,7 +86,7 @@ app.post('/sendMessage', function(req, res, next) {
 	}
 	else {
 		res.send('Success');
-	}
+	}*/
 	
 });
 
